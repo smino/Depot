@@ -1,23 +1,24 @@
-public class Lager extends Artikel{
+import java.util.List;
 
-    public Lager(int amount, int id) {
-        super(amount, id);
-    }
+/**
+ * The type Lager.
+ */
+public class Lager {
 
     /**
-     * Main sollte die Differenz von wear und sellWear im Lager anzeigen
-     * @param args
+     * The entry point of application.
+     *
+     * @param args the input arguments
      */
     public static void main(String[] args) {
-        int[][] produceWear = production.produceWear;
-        int[][] sellWear = Verkauf.sellWear;
-        int[][] lager;
-        produceWear  = production.produce();
-        sellWear = Verkauf.sell();
-        int idg = produceWear [id][0] - sellWear[id][0];
-        int amountg = produceWear [0][amount] - sellWear[0][amount];
-        lager = new int[idg][amountg];
+        List<Artikel> produceWear;
+        List<Artikel> sellWear;
+        List<Artikel> lager;
 
-        System.out.println(String.format("Artikel: %s\n", lager));
+        produceWear  = Production.produce(500);
+        sellWear = Verkauf.sell(produceWear, 200);
+
+        System.out.println(String.format("Article produced: %d\nArticle sold: %d\nDiff: %d", produceWear.size(),
+                sellWear.size(), produceWear.size() - sellWear.size()));
     }
 }
