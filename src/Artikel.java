@@ -1,24 +1,52 @@
-public abstract class Artikel {
+/**
+ * The type Artikel.
+ */
+class Artikel {
 
-    public static int amount;
-    public static int id;
+    /**
+     * The Amount.
+     */
+    private int amount;
+    /**
+     * The Id.
+     */
+    private int id;
 
-    public Artikel(int amount, int id){
+    /**
+     * Instantiates a new Artikel.
+     *
+     * @param amount the amount
+     * @param id     the id
+     */
+    Artikel(int amount, int id){
         this.amount = amount;
         this.id = id;
     }
 
-    public static int getAmount() {
+    /**
+     * Gets amount.
+     *
+     * @return the amount
+     */
+    int getAmount() {
         return amount;
     }
 
-    public static int setAmount(int amount) {
-        Artikel.amount = amount;
-        return amount;
+    /**
+     * Sets amount.
+     *
+     * @param amount the amount
+     */
+    void setAmount(int amount) {
+        this.amount = amount;
     }
 
-    public static int setId(int id) {
-        Artikel.id = id;
-        return id;
+    /**
+     * Sets id.
+     *
+     * @param id the id
+     */
+    void setId(int id) {
+        this.id = id;
     }
 }

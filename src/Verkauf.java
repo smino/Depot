@@ -1,46 +1,51 @@
-public class Verkauf extends Artikel{
+import java.util.ArrayList;
+import java.util.List;
 
-    static int[][] sellWear;
-    private static int[][] wear;
-
-    public Verkauf(int amount, int id) {
-        super(amount, id);
-    }
+/**
+ * The type Verkauf.
+ */
+class Verkauf {
 
     /**
-     * int day: 8 Stunden pro Tag
-     * Methode sell() füllt ein zweidimensionales Array mit ID und Menge von Artikeln die innerhalb
-     * @return
+     * The constant PRODUCTION_DAYS.
      */
-    public static int[][] sell(){
-        wear = new int [setId(id)][setAmount(amount)];
-        int days = 312;     //312 Tage im Jahr, gerechnet 364 - jeden 7ten Tag(Sonntag)
-        int daycounter = 1;
-        int day = 8;
-            if(!minAmount(getAmount()) && daycounter <= days) {
-            for (int i = 0; i < days; i++) {
-                daycounter++;
-                    for (int j = 0; j < day; j++) {
-                        Artikel.amount += (int) (Math.random() * (12 - 6) + 1);
-                        Artikel.id += (int) (Math.random() * (200) + 1);
-                        wear[j][j] = Artikel.id;
-                        wear[j][j + 1] = Artikel.amount;
-                    }
-                }
-                return sellWear = wear;
-            }
-            return sellWear;
-    }
+    private static final int PRODUCTION_DAYS = 312;
 
     /**
+     * The constant STORE_HOURS_PER_DAY.
+     */
+    private static final int STORE_HOURS_PER_DAY = 8;
+
+    /**
+     * Sell list.
      *
-     * @param amount Anzahl an Artikeln
-     * @return liefert bei Anzahl der Artikel größer minValue false zurück, ansonsten true
-     * es kann minimal 1 Artikel verkauft werden.
+     * @param toSell     the to sell
+     * @param sellTarget the sell target
+     * @return the list
      */
-    public static boolean minAmount(int amount){
-        int minValue = 0;
-        if(amount > minValue) return false;
-        else return true;
+    static List<Artikel> sell(List<Artikel> toSell, int sellTarget){
+        List<Artikel> sold = new ArrayList<>();
+        if(!minAmount(sellTarget)) {
+            for (int i = 0; i < PRODUCTION_DAYS; i++) {
+                for (int j = 0; j < STORE_HOURS_PER_DAY; j++) {
+                    if (toSell.size() <= sold.size()) break;
+                    if (Math.random() > 0.9) sold.add(toSell.get(0));
+                }
+            }
+
+            return sold;
+        }
+
+        return new ArrayList<>();
+    }
+
+    /**
+     * Min amount boolean.
+     *
+     * @param target the target
+     * @return the boolean
+     */
+    private static boolean minAmount(int target){
+        return target <= 0;
     }
 }
